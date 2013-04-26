@@ -1,0 +1,24 @@
+{
+  "name": "grunt-customize-bootstrap",
+  "version": "0.1.0",
+  "description": "Grunt task to customize Bootstrap's less files using local overrides.",
+  "keywords": [
+    "gruntplugin",
+    "grunt",
+    "html"
+  ],
+  "homepage": "https://github.com/ianwremmel/grunt-customize-bootstrap",
+  "bugs": "https://github.com/ianwremmel/grunt-customize-bootstrap/issues",
+  "author": "Ian W. Remmel",
+  "main": "Gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ianwremmel/grunt-customize-bootstrap.git"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.0"
+  }
+}
