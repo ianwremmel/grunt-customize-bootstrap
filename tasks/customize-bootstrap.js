@@ -34,16 +34,18 @@ module.exports = function (grunt) {
 				bootstrapLess = bootstrapLess.toString();
 				// First, replace each overridden item in the original bootstrap.less with the path to the
 				// its override.
+				var levels = options.dest.split('/');
+				var srcPath = Array(levels.length + 1).join('../') + options.src;
 				_(overrides).each(function(filename) {
-					bootstrapLess = bootstrapLess.replace('"' + filename, '"' + options.src + '/' + filename);
+					bootstrapLess = bootstrapLess.replace('"' + filename, '"' + srcPath + '/' + filename);
 				});
 
 				// Now, adjust the paths on the non-overridden files so that the less
 				// compiler can find them from the location of the new bootstrap.less.
 				// We make sure we only match items inside quotes that do not start with a leading .
-				var pattern = new RegExp('@import "(' + bootstrapPath + '[^.][\\w\\.\\-_]*?)"');
-				// TODO need to traverse up directory tree when replacing include path
-				bootstrapLess = bootstrapLess.replace(pattern, '@import "' + options.dest + '$1"');
+				var pattern = new RegExp('@import "(?!' + srcPath + ')(.*?)";', 'g');
+				var destPath = Array(levels.length + 1).join('../') + bootstrapPath;
+				bootstrapLess = bootstrapLess.replace(pattern, '@import "' + destPath + '$1"');
 
 				// Finally, write the new bootstrap.less to the dest directory.
 				fs.exists(options.dest, function(exists) {
