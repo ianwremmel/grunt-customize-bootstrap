@@ -10,11 +10,12 @@ module.exports = function (grunt) {
 		'dest'
 	];
 
-	grunt.registerTask('customizeBootstrap', function() {
+	grunt.registerMultiTask('customizeBootstrap', function() {
+		var self = this;
 		var done = this.async();
 
 		_.each(requiredOptions, function(option) {
-			grunt.config.requires(['customizeBootstrap', 'options', option]);
+			grunt.config.requires(['customizeBootstrap', self.target, 'options', option]);
 		});
 
 		var options = this.options();
@@ -43,7 +44,7 @@ module.exports = function (grunt) {
 				// Now, adjust the paths on the non-overridden files so that the less
 				// compiler can find them from the location of the new bootstrap.less.
 				// We make sure we only match items inside quotes that do not start with a leading .
-				var pattern = new RegExp('@import "(?!' + srcPath + ')(.*?)";', 'g');
+				var pattern = new RegExp('@import "(?!' + srcPath + ')(.*?)"', 'g');
 				var destPath = Array(levels.length + 1).join('../') + bootstrapPath;
 				bootstrapLess = bootstrapLess.replace(pattern, '@import "' + destPath + '$1"');
 
