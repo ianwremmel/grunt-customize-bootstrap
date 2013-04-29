@@ -1,3 +1,11 @@
+/*
+ * grunt-customize-bootstrap
+ * https://github.com/ianwremmel/grunt-customize-bootstrap
+ *
+ * Copyright (c) 2013 Ian Remmel
+ * Licensed under the MIT license.
+ */
+
 'use strict';
 
 module.exports = function (grunt) {
@@ -10,15 +18,12 @@ module.exports = function (grunt) {
 		'dest'
 	];
 
-	grunt.registerMultiTask('customizeBootstrap', function() {
-		var self = this;
-		var done = this.async();
-
-		_.each(requiredOptions, function(option) {
-			grunt.config.requires(['customizeBootstrap', self.target, 'options', option]);
+	grunt.registerMultiTask('customizeBootstrap', 'Builds bootstrap.less and responsive.less by substituting paths to locally overridden files', function() {
+		var options = this.options({
+			components: 'components',
+			src: 'src/bootstrap',
+			dest: '.tmp'
 		});
-
-		var options = this.options();
 
 		var bootstrapPath = options.components + '/bootstrap/less/';
 
