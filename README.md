@@ -10,11 +10,13 @@ Grunt plugin which generates bootstrap.less during the build processing, mixing 
 
 ```javascript
 customizeBootstrap: {
-	options: {
-		responsive: false,
-		components: 'components',
-		src: 'src/styles/bootstrap',
-		dest: 'build'
+	development: {
+		options: {
+			responsive: false,
+			components: 'components',
+			src: 'src/styles/bootstrap',
+			dest: 'build'
+		}
 	}
 }
 ```
