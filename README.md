@@ -17,6 +17,7 @@ customizeBootstrap: {
 		dest: 'build'
 	}
 }
+```
 
 ### responsive (optional)
 
