@@ -1,6 +1,6 @@
 {
   "name": "grunt-customize-bootstrap",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Grunt task to customize Bootstrap's less files using local overrides.",
   "keywords": [
     "gruntplugin",
@@ -18,7 +18,7 @@
   "engines": {
     "node": ">=0.8.0"
   },
-  "devDependencies": {
+  "dependencies": {
     "grunt": "~0.4.0",
     "lodash": "~1.2.0"
   }
