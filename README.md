@@ -4,7 +4,7 @@ Grunt plugin which generates bootstrap.less during the build processing, mixing 
 
 ## Dependencies
 
-1. Bower - for now, grunt-customize-bootstrap expectst that you retrieved the bootstrap source using bower.
+1. Bower - for now, grunt-customize-bootstrap expects that you retrieved the bootstrap source using bower.
 
 ## Grunt Config
 
