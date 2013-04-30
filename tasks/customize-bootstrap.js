@@ -74,7 +74,7 @@ module.exports = function (grunt) {
 
 		var lessPath = options.components + '/bootstrap/less';
 
-		// Read bootstrap.less and add insert the local less file right before
+		// Read bootstrap.less and insert the local less file right before
 		// utilities.less (which must always come last)
 		var bootstrapManifest = parseManifest(lessPath + '/bootstrap.less');
 		if (options.local) {
