@@ -73,6 +73,6 @@ Name of less file containing local styles to integrate into bootstrap.
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-0.1.2 Added support for a local less file. Rewrote customize task to use grunt file api, synchronous operations.
-0.1.1 Initial (working) version. Does everything it claims to do.
-0.1.0 Initial version, doesn't work. See 0.1.1
+- 0.1.2 Added support for a local less file. Rewrote customize task to use grunt file api, synchronous operations.
+- 0.1.1 Initial (working) version. Does everything it claims to do.
+- 0.1.0 Initial version, doesn't work. See 0.1.1
