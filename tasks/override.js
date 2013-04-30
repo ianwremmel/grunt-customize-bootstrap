@@ -8,4 +8,4 @@
 
 'use strict';
 
-// Copies a core bootstrap file to the override directory
+// TODO Copies a core bootstrap file to the override directory

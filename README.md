@@ -27,10 +27,10 @@ grunt.initConfig({
   customize_bootstrap: {
     your_target: {
       options: {
-        responsive: false,
         components: 'components',
         src: 'src/bootstrap',
-        dest: '.tmp'
+        dest: '.tmp',
+        responsive: false
       }
     },
   },
@@ -47,26 +47,32 @@ Indicates whether or not to build the responsive stylesheets
 
 #### options.components
 Type: `String`
-Default value: ``
+Default value: `components`
 
 Location of the bower `components` directory.
 
 #### options.src
 Type: `String`
-Default value: ``
+Default value: `src/bootstrap`
 
-Location of the overridden bootstrap files
+Location of the overridden bootstrap files. Must be a directory
 
 #### options.dest
 Type: `String`
-Default value: ``
+Default value: `.tmp`
 
-Location to place the generated bootstrap.less (and possibly responsive.less)
+Location to place the generated bootstrap.less (and possibly responsive.less).
 
+#### options.local
+Type: `String`
+Default value: `null`
+
+Name of less file containing local styles to integrate into bootstrap.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+0.1.2 Added support for a local less file. Rewrote customize task to use grunt file api, synchronous operations.
 0.1.1 Initial (working) version. Does everything it claims to do.
 0.1.0 Initial version, doesn't work. See 0.1.1
