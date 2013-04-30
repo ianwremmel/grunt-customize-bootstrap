@@ -19,6 +19,15 @@ module.exports = function (grunt) {
 	];
 
 	grunt.registerMultiTask('customizeBootstrap', 'Builds bootstrap.less and responsive.less by substituting paths to locally overridden files', function() {
+		var options = this.options({
+			components: 'components',
+			src: 'src/bootstrap',
+			dest: '.tmp',
+			responsive: false
+		});
+
+		var lessPath = options.components + '/bootstrap/less';
+
 		var parseManifest = function(filename) {
 			var manifestFile = grunt.file.read(filename);
 			var pattern = /@import "([\w\.-]+)";/;
@@ -34,31 +43,29 @@ module.exports = function (grunt) {
 			return manifest;
 		};
 
-		var createManifest = function(manifest, overrides, lessPath, src, dest) {
-			var levels = dest.split('/').length;
+		var createManifest = function(manifest, overrides) {
+			var levels = options.dest.split('/').length;
 			var prefix = new Array(levels + 1).join('../');
 
 			var less = '';
 			_(manifest).each(function(filename) {
 				less += '@import "' + prefix;
 				if (_(overrides).contains(filename)) {
-					less += src;
+					less += options.src + '/' + filename;
+				}
+				// This is a terrible way to do this comparison, but no more efficient
+				// option that doesn't produce unreadable code seems to present itself.
+				else if (filename === options.local) {
+					less += filename;
 				}
 				else {
-					less += lessPath;
+					less += lessPath + '/' + filename;
 				}
-				less += '/' + filename + '";' + "\n";
+				less += '";' + "\n";
 			});
 
 			return less;
 		};
-
-		var options = this.options({
-			components: 'components',
-			src: 'src/bootstrap',
-			dest: '.tmp',
-			responsive: false
-		});
 
 		// Remove trailing slashes
 		var pattern = /\/$/;
@@ -72,8 +79,6 @@ module.exports = function (grunt) {
 		// Determine which files have been overridden
 		var overrides = grunt.file.expand({cwd: options.src}, '*');
 
-		var lessPath = options.components + '/bootstrap/less';
-
 		// Read bootstrap.less and insert the local less file right before
 		// utilities.less (which must always come last)
 		var bootstrapManifest = parseManifest(lessPath + '/bootstrap.less');
@@ -84,7 +89,7 @@ module.exports = function (grunt) {
 		}
 
 		// Turn the manifest back into a string
-		var bootstrapDotLess = createManifest(bootstrapManifest, overrides, lessPath, options.src, options.dest);
+		var bootstrapDotLess = createManifest(bootstrapManifest, overrides);
 
 		// Write the new manifest to its new location
 		grunt.file.write(options.dest + '/bootstrap.less', bootstrapDotLess);
@@ -93,7 +98,7 @@ module.exports = function (grunt) {
 		// desired).
 		if (options.responsive) {
 			var responsiveManifest = parseManifest(lessPath + '/responsive.less');
-			var responsiveDotLess = createManifest(responsiveManifest, overrides, lessPath, options.src, options.dest);
+			var responsiveDotLess = createManifest(responsiveManifest, overrides);
 
 			grunt.file.write(options.dest + '/responsive.less', responsiveDotLess);
 		}
