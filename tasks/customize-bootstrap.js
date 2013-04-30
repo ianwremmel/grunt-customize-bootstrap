@@ -35,7 +35,6 @@ module.exports = function (grunt) {
 		};
 
 		var createManifest = function(manifest, overrides, lessPath, src, dest) {
-
 			var levels = dest.split('/').length;
 			var prefix = new Array(levels + 1).join('../');
 
@@ -71,7 +70,7 @@ module.exports = function (grunt) {
 		});
 
 		// Determine which files have been overridden
-		var overrides = grunt.file.expand(options.src + '/*');
+		var overrides = grunt.file.expand({cwd: options.src}, '*');
 
 		var lessPath = options.components + '/bootstrap/less';
 
