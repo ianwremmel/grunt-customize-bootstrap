@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 		'dest'
 	];
 
-	grunt.registerMultiTask('customizeBootstrap', 'Builds bootstrap.less and responsive.less by substituting paths to locally overridden files', function() {
+	grunt.registerMultiTask('customize_bootstrap', 'Builds bootstrap.less and responsive.less by substituting paths to locally overridden files', function() {
 		var options = this.options({
 			components: 'components',
 			src: 'src/bootstrap',
