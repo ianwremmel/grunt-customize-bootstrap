@@ -19,84 +19,84 @@ module.exports = function (grunt) {
 	];
 
 	grunt.registerMultiTask('customizeBootstrap', 'Builds bootstrap.less and responsive.less by substituting paths to locally overridden files', function() {
+		var parseManifest = function(filename) {
+			var manifestFile = grunt.file.read(filename);
+			var pattern = /@import "([\w\.-]+)";/;
+
+			var start = 0;
+			var match;
+			var manifest = [];
+			while (match = pattern.exec(manifestFile.substring(start))) {
+				manifest.push(match[1]);
+				start += match['index'] + 1;
+			}
+
+			return manifest;
+		};
+
+		var createManifest = function(manifest, overrides, lessPath, src, dest) {
+
+			var levels = dest.split('/').length;
+			var prefix = new Array(levels + 1).join('../');
+
+			var less = '';
+			_(manifest).each(function(filename) {
+				less += '@import "' + prefix;
+				if (_(overrides).contains(filename)) {
+					less += src;
+				}
+				else {
+					less += lessPath;
+				}
+				less += '/' + filename + '";' + "\n";
+			});
+
+			return less;
+		};
+
 		var options = this.options({
 			components: 'components',
 			src: 'src/bootstrap',
-			dest: '.tmp'
+			dest: '.tmp',
+			responsive: false
 		});
 
-		var bootstrapPath = options.components + '/bootstrap/less/';
-
-		fs.readdir(options.src, function(err, overrides) {
-			if (err) {
-				done(false);
+		// Remove trailing slashes
+		var pattern = /\/$/;
+		_(options).each(function(option) {
+			// Make sure option has a replace method
+			if (option.replace) {
+				option = option.replace(pattern, '');
 			}
-
-			var build = function(filename, callback) {
-				fs.readFile(bootstrapPath + filename, function(err, bootstrapLess) {
-					if (err) {
-						done(false);
-					}
-
-					bootstrapLess = bootstrapLess.toString();
-					// First, replace each overridden item in the original bootstrap.less with the path to the
-					// its override.
-					var levels = options.dest.split('/');
-					var srcPath = Array(levels.length + 1).join('../') + options.src;
-					_(overrides).each(function(filename) {
-						bootstrapLess = bootstrapLess.replace('"' + filename, '"' + srcPath + '/' + filename);
-					});
-
-					// Now, adjust the paths on the non-overridden files so that the less
-					// compiler can find them from the location of the new bootstrap.less.
-					// We make sure we only match items inside quotes that do not start with a leading .
-					var pattern = new RegExp('@import "(?!' + srcPath + ')(.*?)"', 'g');
-					var destPath = Array(levels.length + 1).join('../') + bootstrapPath;
-					bootstrapLess = bootstrapLess.replace(pattern, '@import "' + destPath + '$1"');
-
-					// Finally, write the new bootstrap.less to the dest directory.
-					fs.exists(options.dest, function(exists) {
-						if (exists) {
-							fs.writeFile(options.dest + '/' + filename, bootstrapLess, function(err) {
-								if (err) {
-									done(false);
-								}
-								if (!callback) {
-									done(true);
-								}
-								else {
-									callback();
-								}
-							});
-						}
-						else {
-							fs.mkdir(options.dest, function(err) {
-								if (err) {
-									done(false);
-								}
-
-								fs.writeFile(options.dest + '/' + filename, bootstrapLess, function(err) {
-									if (err) {
-										done(false);
-									}
-									if (!callback) {
-										done(true);
-									}
-									else {
-										callback();
-									}
-								});
-							});
-						}
-					});
-				});
-			};
-
-			build('bootstrap.less', function() {
-				if (options.responsive) {
-					build('responsive.less');
-				}
-			});
 		});
+
+		// Determine which files have been overridden
+		var overrides = grunt.file.expand(options.src + '/*');
+
+		var lessPath = options.components + '/bootstrap/less';
+
+		// Read bootstrap.less and add insert the local less file right before
+		// utilities.less (which must always come last)
+		var bootstrapManifest = parseManifest(lessPath + '/bootstrap.less');
+		if (options.local) {
+			var utilities = bootstrapManifest.pop();
+			bootstrapManifest.push(options.local);
+			bootstrapManifest.push(utilities);
+		}
+
+		// Turn the manifest back into a string
+		var bootstrapDotLess = createManifest(bootstrapManifest, overrides, lessPath, options.src, options.dest);
+
+		// Write the new manifest to its new location
+		grunt.file.write(options.dest + '/bootstrap.less', bootstrapDotLess);
+
+		// Repeat the above (without local less) for the responsive styles (if
+		// desired).
+		if (options.responsive) {
+			var responsiveManifest = parseManifest(lessPath + '/responsive.less');
+			var responsiveDotLess = createManifest(responsiveManifest, overrides, lessPath, options.src, options.dest);
+
+			grunt.file.write(options.dest + '/responsive.less', responsiveDotLess);
+		}
 	});
 };
