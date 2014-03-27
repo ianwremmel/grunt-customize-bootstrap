@@ -76,3 +76,6 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 - 0.1.2 Added support for a local less file. Rewrote customize task to use grunt file api, synchronous operations.
 - 0.1.1 Initial (working) version. Does everything it claims to do.
 - 0.1.0 Initial version, doesn't work. See 0.1.1
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ianwremmel/grunt-customize-bootstrap/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
