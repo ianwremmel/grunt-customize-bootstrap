@@ -1,9 +1,9 @@
-# grunt-customize-bootstrap
+# grunt-customize-bootstrap [![GitHub version](https://badge.fury.io/gh/ianwremmel%2Fgrunt-customize-bootstrap.svg)](http://badge.fury.io/gh/ianwremmel%2Fgrunt-customize-bootstrap)
 
 > Plugin to aid in overriding bootstrap less files without altering core files.
 
 ## Getting Started
-This plugin requires Grunt `~0.4.1`
+This plugin requires Grunt `^0.4.4`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -17,20 +17,21 @@ One the plugin has been installed, it may be enabled inside your Gruntfile with 
 grunt.loadNpmTasks('grunt-customize-bootstrap');
 ```
 
-## The "customize_bootstrap" task
+## The "customize-bootstrap" task
 
 ### Overview
-In your project's Gruntfile, add a section named `customize_bootstrap` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `customize-bootstrap` to the data object passed into `grunt.initConfig()`.
 
-```js
+Note: `customize_bootstrap` or `customizeBootstrap` are also valid task names.
+
+```JavaScript
 grunt.initConfig({
-  customize_bootstrap: {
-    your_target: {
+  'customize-bootstrap': {
+    yourTarget: {
       options: {
         components: 'components',
-        src: 'src/bootstrap',
-        dest: '.tmp',
-        responsive: false
+        src: 'src/styles/bootstrap/',
+        dest: 'src/styles/',
       }
     },
   },
@@ -39,40 +40,40 @@ grunt.initConfig({
 
 ### Options
 
-#### options.responsive
-Type: `Boolean`
-Default value: `false`
-
-Indicates whether or not to build the responsive stylesheets
 
 #### options.components
-Type: `String`
-Default value: `components`
 
-Location of the bower `components` directory.
+Type: `String`  
+Default: `bower_components`  
+
+Location of the `bower_components` directory.
 
 #### options.src
-Type: `String`
-Default value: `src/bootstrap`
 
-Location of the overridden bootstrap files. Must be a directory
+Type: `String`  
+Default: `src/styles/bootstrap/`  
+
+Location of the overridden Bootstrap files. Must be a directory.
 
 #### options.dest
-Type: `String`
-Default value: `.tmp`
 
-Location to place the generated bootstrap.less (and possibly responsive.less).
+Type: `String`  
+Default: `src/styles/`  
+
+Location to place the generated `bootstrap.less`.
 
 #### options.local
-Type: `String`
-Default value: `null`
 
-Name of less file containing local styles to integrate into bootstrap.
+Type: `String`  
+Default value: `null`  
+
+Name of LESS file containing local styles to integrate into Bootstrap.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+- 0.1.5 Code cleanup; removed features specific to Bootstrap 2.x.
 - 0.1.2 Added support for a local less file. Rewrote customize task to use grunt file api, synchronous operations.
 - 0.1.1 Initial (working) version. Does everything it claims to do.
 - 0.1.0 Initial version, doesn't work. See 0.1.1
