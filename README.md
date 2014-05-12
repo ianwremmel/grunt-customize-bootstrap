@@ -19,6 +19,12 @@ grunt.loadNpmTasks('grunt-customize-bootstrap');
 
 ## The "customize-bootstrap" task
 
+Let's face it, while we all love Bootstrap, there's really no obvious way to override just the parts you want. Most likely, downloaded Bootstrap with Bower, but you can't modify the source LESS files because if bootstrap updates, your changes will be lost. You can't copy the LESS files into your project because if you do, what was the point in using Bower in the first place? You could override what you need to by just rewriting the chunks of LESS that you need to change, but order is important; can you be certain that your new definition won't come too late?
+
+Instead, use this Grunt task. Any time you need to make a change to a Bootstrap core style, copy the file where it's defined to the folder specified by `options.src` and make your changes there. After running `grunt customize-bootstrap`, you'll have a new `bootstrap.less` file that includes all of your changes.
+
+*Note: this task simply generates a new `bootstrap.less`. You'll need to use another plugin (e.g. `grunt-contrib-less` to actually generate your final CSS.*
+
 ### Overview
 In your project's Gruntfile, add a section named `customize-bootstrap` to the data object passed into `grunt.initConfig()`.
 
