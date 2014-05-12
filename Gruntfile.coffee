@@ -17,10 +17,13 @@ module.exports = (grunt) ->
       options:
         files: [
           'package.json'
-          'bower.json'
+        ]
+        commitFiles: [
+          'package.json'
         ]
         tagName: '%VERSION%'
         updateConfigs: ['pkg']
+        pushTo: 'origin'
 
     githooks:
       'pre-commit':
