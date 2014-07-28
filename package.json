@@ -1,7 +1,7 @@
 {
   "name": "grunt-customize-bootstrap",
   "description": "Override Bootstrap's core LESS without directly modifying Bootstrap.",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "homepage": "https://github.com/ianwremmel/grunt-customize-bootstrap",
   "author": {
     "name": "Ian Remmel",
