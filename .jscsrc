@@ -60,9 +60,7 @@
     "+",
     "-",
     "~",
-    "!",
-    "*",
-    "/"
+    "!"
   ],
   "disallowSpaceBeforePostfixUnaryOperators": [
     "++",
@@ -92,20 +90,10 @@
   ],
   "disallowSpaceAfterBinaryOperators": [
     "/",
-    "*",
-    "?",
-    "==",
-    "===",
-    "!=",
-    "!==",
-    ">",
-    ">=",
-    "<",
-    "<=",
-    "||",
-    "&&"
+    "*"
   ],
   "requireSpaceAfterBinaryOperators": [
+    ",",
     ":",
     "+",
     "-",
@@ -113,7 +101,14 @@
     "==",
     "===",
     "!=",
-    "!=="
+    "!==",
+    "?",
+    ">",
+    ">=",
+    "<",
+    "<=",
+    "||",
+    "&&"
   ],
   "disallowMultipleLineStrings": true,
   "validateQuoteMarks": "'",

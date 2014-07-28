@@ -35,7 +35,7 @@ grunt.initConfig({
   'customize-bootstrap': {
     yourTarget: {
       options: {
-        components: 'components',
+        bootstrapPath: 'node_modules/bootstrap',
         src: 'src/styles/bootstrap/',
         dest: 'src/styles/',
       }
@@ -47,12 +47,12 @@ grunt.initConfig({
 ### Options
 
 
-#### options.components
+#### options.bootstrapPath
 
 Type: `String`  
-Default: `bower_components`  
+Default: `bower_components/bootstrap`  
 
-Location of the `bower_components` directory.
+Location of the `bootstrap` directory.
 
 #### options.src
 
@@ -79,6 +79,7 @@ Name of LESS file containing local styles to integrate into Bootstrap.
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+- 0.2.0 Replaced `components` option with `bootstrapPath` option to support bootstrap in npm.
 - 0.1.5 Code cleanup; removed features specific to Bootstrap 2.x.
 - 0.1.2 Added support for a local less file. Rewrote customize task to use grunt file api, synchronous operations.
 - 0.1.1 Initial (working) version. Does everything it claims to do.
