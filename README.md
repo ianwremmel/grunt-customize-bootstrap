@@ -1,3 +1,5 @@
+Note: this plugin is largely abandoned. While it should work for any version of bootstrap 3, with bootstrap 4 being rewritten in sass, I don't see a whole lot of value in maintaining it further. That said, I'm open to pull-requests.
+
 # grunt-customize-bootstrap [![GitHub version](https://badge.fury.io/gh/ianwremmel%2Fgrunt-customize-bootstrap.svg)](http://badge.fury.io/gh/ianwremmel%2Fgrunt-customize-bootstrap)
 
 > Plugin to aid in overriding bootstrap less files without altering core files.
