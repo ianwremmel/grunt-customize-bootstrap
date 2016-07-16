@@ -1,6 +1,6 @@
 Note: this plugin is largely abandoned. While it should work for any version of bootstrap 3, with bootstrap 4 being rewritten in sass, I don't see a whole lot of value in maintaining it further. That said, I'm open to pull-requests.
 
-# grunt-customize-bootstrap [![GitHub version](https://badge.fury.io/gh/ianwremmel%2Fgrunt-customize-bootstrap.svg)](http://badge.fury.io/gh/ianwremmel%2Fgrunt-customize-bootstrap)
+# grunt-customize-bootstrap [![GitHub version](https://badge.fury.io/gh/ianwremmel%2Fgrunt-customize-bootstrap.svg)](http://badge.fury.io/gh/ianwremmel%2Fgrunt-customize-bootstrap) [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 > Plugin to aid in overriding bootstrap less files without altering core files.
 
@@ -86,6 +86,3 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 - 0.1.2 Added support for a local less file. Rewrote customize task to use grunt file api, synchronous operations.
 - 0.1.1 Initial (working) version. Does everything it claims to do.
 - 0.1.0 Initial version, doesn't work. See 0.1.1
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ianwremmel/grunt-customize-bootstrap/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
