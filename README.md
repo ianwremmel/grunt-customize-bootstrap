@@ -2,6 +2,8 @@ Note: this plugin is largely abandoned. While it should work for any version of 
 
 # grunt-customize-bootstrap [![GitHub version](https://badge.fury.io/gh/ianwremmel%2Fgrunt-customize-bootstrap.svg)](http://badge.fury.io/gh/ianwremmel%2Fgrunt-customize-bootstrap) [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ianwremmel/grunt-customize-bootstrap.svg)](https://greenkeeper.io/)
+
 > Plugin to aid in overriding bootstrap less files without altering core files.
 
 ## Getting Started
